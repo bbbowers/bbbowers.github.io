@@ -1,0 +1,1 @@
+document.getElementById("main").addEventListener("click", (e) => {e.target.textContent = e.target.textContent + "!"})
