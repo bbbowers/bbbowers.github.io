@@ -1,0 +1,7 @@
+.buttons > button {
+    background-color: red;
+    width: 25px;
+    height: 25px;
+    border-radius: 25%;
+    font-size: 24px;
+}
