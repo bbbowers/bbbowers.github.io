@@ -23,6 +23,7 @@ document.querySelector("#start-button").addEventListener("click", () => {
 
 document.querySelectorAll(".buttons button").forEach((btn, index) => {
     btn.style.backgroundColor =  `hsl(${index * (360 / buttonCount)}, 100%, 50%)`;
+    btn.setAttribute("orig_color", window.getComputedStyle(btn).getPropertyValue("background-color"));
 });
 
 document.querySelectorAll(".buttons button").forEach((btn, index) => btn.addEventListener("mousedown", () => {
@@ -59,7 +60,7 @@ document.querySelectorAll(".buttons button").forEach((btn, index) => btn.addEven
 
 function playColor(colorIndex) {
     const button = document.querySelectorAll(".buttons button")[colorIndex];
-    orig_color = window.getComputedStyle(button).getPropertyValue("background-color");
+    orig_color = button.getAttribute("orig_color");
     hsl = RGBtoHSL(orig_color);
     hsl_lighter = hsl;
     hsl_lighter[2] = clamp(hsl[2] + 0.3, 0, 1);
@@ -67,7 +68,7 @@ function playColor(colorIndex) {
     button.classList.add("playing");
     playOscillator(context.currentTime, context.currentTime + 0.5, 220 + colorIndex * 110);
     setTimeout(() => {
-        button.style.backgroundColor = orig_color;
+        button.style.backgroundColor = button.getAttribute("orig_color");
         button.classList.remove("playing");
     }, 500);
 }
